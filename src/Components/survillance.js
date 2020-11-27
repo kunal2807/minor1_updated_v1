@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Grid, makeStyles, Button, Typography} from '@material-ui/core';
-
+import Blink from 'react-blink-text'
+import Webcam from 'react-webcam';
 
 const useStyles=makeStyles(theme=>({
   AppBarHeight: {
@@ -79,8 +80,12 @@ const useStyles=makeStyles(theme=>({
 
   streamer: {
     height: "88vh",
-    backgroundColor: "#f0f0f0",
-    marginBottom: "1.5rem"
+    width: "100%",
+    backgroundColor: "#202124",
+    marginBottom: "1.5rem",
+    borderRadius: "10px",
+    // position: "absolute",
+    // zIndex: 100
   }
 }))
 
@@ -115,6 +120,9 @@ export default function Survilance(){
     </React.Fragment>
   )
 
+  const webcam = (<Webcam mirrored className={classes.streamer}/>)
+  console.log(webcam)
+
   return(
     <React.Fragment>
       <AppBar style={{backgroundImage: "linear-gradient(to bottom, rgb(0 255 166 / 44%), rgb(30 168 234))"}}>
@@ -129,13 +137,13 @@ export default function Survilance(){
         <Grid item container direction="column" lg style={{marginLeft: "25px", marginTop: "25px"}}>
           <Grid item>
             <div className={classes.streamer}>
-              STREAMER
+              {/* <Blink color='white' text='No Source detected' fontSize='6rem'/> */}
+              <img url="localhost:8000/video_feed" alt="feed"/>
             </div>
           </Grid>
-          <Grid item align="center">
-            
-          </Grid>
         </Grid>
+        
+        
         <Grid item container direction="column" lg={2} style={{marginLeft: "25px", marginTop: "25px"}}>
           <Grid item>
             GUIDELINES

@@ -1,10 +1,5 @@
 import { createMuiTheme} from '@material-ui/core/styles';
 
-const Blue = '#0B72B9'
-const Orange = '#FFBA60'
-const Grey = '#868686'
-
-
 export default createMuiTheme({
   props: {
     MuiButtonBase: {
