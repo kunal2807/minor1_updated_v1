@@ -1,31 +1,21 @@
+import Main from "./Components/Main";
+import { MuiThemeProvider } from "@material-ui/core";
+import theme from "./Components/theme";
+import Survilance from "./Components/survillance";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Main from './Components/Main';
-import { MuiThemeProvider } from '@material-ui/core';
-import theme from './Components/theme';
-import Survilance from './Components/survillance';
-
-
-const showMain = () => {
-  if (window.location.pathname === "/") {
-    return <Main/>
-  }
-}
-
-const showSurvilance = () => {
-  if (window.location.pathname === "/Survilance") {
-    return <Survilance/>
-  }
-}
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div>
-    <MuiThemeProvider theme={theme}>
-      {showMain()}
-      {showSurvilance()}
-    </MuiThemeProvider>
-    </div>
+    <Router>
+      <MuiThemeProvider theme={theme}>
+        <Switch>
+          <Route path="/survilliance" render={(props) => <Survilance />} />
+          <Route path="/" render={(props) => <Main />} />
+        </Switch>
+      </MuiThemeProvider>
+    </Router>
   );
 }
 
