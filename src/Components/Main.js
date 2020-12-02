@@ -16,74 +16,48 @@ const Heading = styled.h1`
   text-align: center;
 `;
 
-const Button = styled.button`
+const BtnCustom = styled.span`
+  position: relative;
+  text-transform: none;
+  text-align: center;
+  transition: all 0.15s ease;
+  letter-spacing: 0.025em;
+  font-size: 0.875rem;
+  will-change: transform;
+
   display: inline-block;
   font-weight: 600;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
-
+  -webkit-user-select: none;
   user-select: none;
-  border: 1px solid transparent;
-  padding: 0.625rem 1.25rem;
+  border: ${(props) =>
+    props.color ? "1px solid " + props.color : "1px solid #5e72e4"};
+  color: white;
+  background-color: ${(props) => (props.color ? props.color : "#5e72e4")};
+  background-image: none;
+
+  padding: 0.625rem 1.8rem;
+  font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.375rem;
-  position: relative;
-  text-transform: none;
-  transition: all 0.15s ease;
-  letter-spacing: 0.025em;
-  font-size: 0.875rem;
-  will-change: transform;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
-  box-shadow: none;
-  color: #fff;
-  background-color: #324cdd;
-  border-color: #5e72e4;
-  &:hover {
+
+  border-radius: 1rem;
+
+  width: 150px;
+  &:hover: {
+    color: white;
     text-decoration: none;
-    transform: translateY(-1px);
   }
-  &:focus {
+
+  &:focus: {
+    color: white;
     text-decoration: none;
-    transform: translateY(-1px);
-    border: none;
+    outline: none !important;
   }
 `;
-// const useStyles = makeStyles((theme) => ({
-//   heading: {
-//     marginTop: "20rem",
-//     marginBottom: "8rem",
-//     fontFamily: "Cursive",
-//     fontSize: "4rem",
-//     color: "white",
-//     textAlign: "center",
-//   },
-
-//   background: {
-//     // backgroundColor: "blue",
-//     // backgroundImage: "linear-gradient(to right bottom, #373b44, #4286f4)",
-//     backgroundImage: "linear-gradient(87deg,#11cdef,#1171ef)!important",
-//     backgroundSize: "cover",
-//     width: "100vw",
-//     height: "100vh",
-//     [theme.breakpoints.down("sm")]: {
-//       width: "159vw",
-//       height: "148.5vh",
-//     },
-//   },
-
-//   button: {
-//     ...theme.typography.button,
-//     // marginBottom: "16.5rem"
-//   },
-// }));
 
 export default class Main extends React.Component {
-  // const classes = useStyles();
-  // const theme=useTheme()
-
   componentDidMount() {
     // AOS.init();
     // Hero typed
@@ -126,18 +100,9 @@ export default class Main extends React.Component {
             </Heading>
           </Col>
           <Col md="1" className="align-self-center">
-            {/* <Button
-              className="btn "
-
-            > */}
-            <Link
-              className="text-white btn btn-primary btn-lg "
-              style={{ backgroundColor: "#5e72e4", borderColor: "#5e72e4" }}
-              to="/survilliance"
-            >
-              START
+            <Link to="/survilliance/live">
+              <BtnCustom color="#FF1493">START</BtnCustom>
             </Link>
-            {/* </Button> */}
           </Col>
         </Row>
       </Container>
