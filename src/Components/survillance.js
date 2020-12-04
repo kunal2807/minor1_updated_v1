@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabContainer: {
     marginLeft: "auto",
-    alignItems: "center",
+    // alignItems: "",
     marginRight: "auto",
     background: "#f5f7f9",
 
