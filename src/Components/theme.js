@@ -13,7 +13,7 @@ export default createMuiTheme({
       gradientHigh: "#5758BB",
     },
     primary: {
-      main: `#11cdef`,
+      main: "rgb(17, 205, 239)",
     },
     secondary: {
       main: "#3175b4",
@@ -21,19 +21,6 @@ export default createMuiTheme({
   },
 
   typography: {
-    h1: {
-      // backgroundImage: "linear-gradient(to right, #ffefba, #ffffff)",
-      // WebkitBackgroundClip: "text",
-      // color: "white",
-      // textTransform: "uppercase",
-      // transition: "all .2s",
-      // cursor: "default",
-      // "&:hover": {
-      //   transform: "skewY(2deg) skewX(15deg) scale(1.2)",
-      //   textShadow: ".5rem 1rem 2rem  rgba($color-black, .2)",
-      // }
-    },
-
     h5: {
       backgroundImage: "linear-gradient(to right, #ffefba, #ffffff)",
       WebkitBackgroundClip: "text",
