@@ -1,19 +1,19 @@
+// end-point: http://localhost:8000/video_feed
+
 import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Grid,
   makeStyles,
-  Button,
   Typography,
-  Container,
   Card,
 } from "@material-ui/core";
 // import Webcam from "react-webcam";
 // import Blink from 'blink'
 import styled from "styled-components";
-import { Link, NavLink, Switch, Route } from "react-router-dom";
-import Live from "./live";
-import Record from "./record";
+import { NavLink} from "react-router-dom";
+// import Live from "./live";
+// import Record from "./record";
 // import videoFeed from '../axios'
 import axios from "axios";
 import {
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Survilance() {
   const classes = useStyles();
-  const [feed, setFeed] = useState("");
+  // const [feed, setFeed] = useState("");
   const [summary, setSummary] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [media, setMedia] = useState(null);
@@ -211,7 +211,7 @@ export default function Survilance() {
     </React.Fragment>
   );
 
-  const videoSource = "0";
+  // const videoSource = "0";
 
   const fileInfo = media ? (
     <span className="mx-2">File Name: {" " + media.name}</span>
@@ -237,6 +237,8 @@ export default function Survilance() {
                 display: "inline-block",
                 borderRadius: "3px",
                 margin: "auto",
+                cursor: "pointer"
+
               }}
             >
               Video Upload!
@@ -292,7 +294,7 @@ export default function Survilance() {
           <Grid item>
             <div className={classes.streamer}>
               {/* <Blink color='white' text='No Source detected' fontSize='6rem'/> */}
-              <img url={feed} alt="feed" />
+              <img url="http://localhost:8000/video_feed" alt="feed" />
             </div>
           </Grid>
         </Grid>
