@@ -33,6 +33,17 @@ export default createMuiTheme({
       marginTop: "0.7rem",
     },
 
+    h6: {
+      fontFamily: "Roboto, sans-serif",
+      fontWeight: 500
+    },
+
+    body1: {
+      fontFamily: "Roboto, sans-serif",
+      fontWeight: 400
+      // fontWeight: "700"
+    },
+
     button: {
       fontSize: "2rem",
       backgroundImage: "linear-gradient(to right, #e8cbc0, #636fa4)",

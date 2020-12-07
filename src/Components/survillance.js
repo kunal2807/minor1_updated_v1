@@ -191,15 +191,15 @@ export default function Survilance() {
 
         <Grid item>
           <Card style={{marginTop: "2em"}}>    
-            <Typography align="center" gutterBottom variant="h4">News </Typography>
+            <Typography align="center" gutterBottom variant="h4">Today's Headlines </Typography>
             {newss.length !== 0 &&
               newss.slice(0, 5).map((x) => {
                 return (
                   <Row className="mb-2" style={{lineHeight: "1.5rem",marginTop: "2rem"}}>
                     <Col style={{}} className="text-left">
-                      <Card>
+                      <Typography variant="h6" align="center">
                         {x.title}
-                      </Card>
+                      </Typography>
                     </Col>
                   </Row>
                 );
@@ -218,6 +218,9 @@ export default function Survilance() {
   ) : (
     <span className="mx-2">Uplaod New Video </span>
   );
+
+
+
   return (
     <React.Fragment>
       <Modal show={showModal} onHide={handleCloseModal}>
@@ -306,25 +309,43 @@ export default function Survilance() {
               <Typography variant="h4" align="center" gutterBottom>GENRAL GUIDELINES</Typography>
               <ul>
                 <li>
-                  Frequently wash your hands with soap and water for at least 20
-                  seconds. When soap and running water are unavailable, use an
-                  alcohol-based hand rub with at least 60% alcohol.
+                  <Typography variant="body1">
+                    Frequently wash your hands with soap and water for at least 20
+                    seconds. When soap and running water are unavailable, use an
+                    alcohol-based hand rub with at least 60% alcohol.
+                  </Typography>
                 </li>
                 <li>
-                  Avoid touching your eyes, nose, or mouth with unwashed hands.
+                  <Typography variant="body1">
+                    Avoid touching your eyes, nose, or mouth with unwashed hands.
+                  </Typography>
                 </li>
                 <li>
-                  Practice good respiratory etiquette, including covering coughs
-                  and sneezes.
-                </li>
-                <li>Avoid close contact with people who are sick.</li>
-                <li>Stay home if sick.</li>
-                <li>
-                  Put 6 feet of distance between yourself and people who don’t
-                  live in your household.
+                  <Typography variant="body1">
+                    Practice good respiratory etiquette, including covering coughs
+                    and sneezes.
+                  </Typography>
                 </li>
                 <li>
-                  Masks help prevent you from getting or spreading the virus.
+                  <Typography variant="body1">
+                    Avoid close contact with people who are sick.
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body1">
+                    Stay home if sick.
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body1">
+                    Put 6 feet of distance between yourself and people who don’t
+                    live in your household.
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body1">
+                    Masks help prevent you from getting or spreading the virus.
+                  </Typography>
                 </li>
               </ul>
             </Card>
