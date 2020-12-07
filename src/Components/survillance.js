@@ -23,12 +23,61 @@ import {
   Modal,
   Button as BButton,
 } from "react-bootstrap";
+
 const Heading = styled.h1`
-  font-family: cursive;
-  font-size: 4rem;
+  font-family: Comic Neue, cursive;
+  font-weight: 800;
+  font-size: 5rem;
   color: white;
   text-align: center;
 `;
+
+const BtnCustom = styled.span`
+  position: relative;
+  text-transform: none;
+  text-align: center;
+  transition: all 0.15s ease;
+  letter-spacing: 0.025em;
+  font-size: 1.5rem;
+  will-change: transform;
+  margin-top: 2vh;
+  margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: inline-block;
+  font-weight: 600;
+  font-family: Comic Neue, cursive;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  border: ${(props) =>
+    props.color ? "1px solid " + props.color : "1px solid #5e72e4"};
+  color: white;
+  background-color: ${(props) => (props.color ? props.color : "#5e72e4")};
+  background-image: none;
+
+  padding: 0.625rem 1.8rem;
+  line-height: 1.5;
+
+  border-radius: 1rem;
+
+  width: 150px;
+  &:hover: {
+    color: white;
+    text-decoration: none;
+  }
+
+  &:focus: {
+    color: white;
+    text-decoration: none;
+    outline: none !important;
+  }
+`;
+
+
 const useStyles = makeStyles((theme) => ({
   AppBarHeight: {
     marginBottom: "3rem",
@@ -39,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   background: {
-    backgroundColor: "white!important",
+    // backgroundColor: "red!important",
   },
 
   button: {
@@ -59,11 +108,12 @@ const useStyles = makeStyles((theme) => ({
     // background: "#f5f7f9",
     marginTop: "2em",
     lineHeight: "3rem",
-
+    // backgroundColor: "red",
     height: "100%",
   },
   tab: {
-    fontSize: "1.3rem",
+    fontFamily: "Comic Neue, cursive",
+    fontSize: "1.5rem",
     color: "rgba(0,0,0,.85)",
     zIndex: 100,
 
@@ -82,6 +132,12 @@ const useStyles = makeStyles((theme) => ({
     //   borderRight: "3px solid #f8f9fe",
     // },
   },
+  card: {
+    boxShadow:"0 .5rem 1rem rgba(0,0,0,.15)",
+    borderRadius: ".5rem",
+    backgroundColor: "#d5fefd", 
+    backgroundImage: "linear-gradient(315deg, #c9cffd 0%, #fffcff 74%);",
+  },
   streamer: {
     height: "75vh",
     width: "100%",
@@ -89,6 +145,14 @@ const useStyles = makeStyles((theme) => ({
     // marginBottom: "1.5rem",
     borderRadius: "10px",
   },
+  video: {
+    height: "75vh",
+    width: "100%",
+    // backgroundColor: "#202124",
+    // marginBottom: "1.5rem",
+    borderRadius: "10px",
+
+  }
 }));
 
 export default function Survilance() {
@@ -105,7 +169,7 @@ export default function Survilance() {
     axios
       .get("https://api.quarantine.country/api/v1/summary/region?region=india")
       .then((response) => {
-        console.log(response.data.data.summary);
+        // console.log(response.data.data.summary);
         setSummary(response.data.data.summary);
       });
   }, []);
@@ -116,7 +180,7 @@ export default function Survilance() {
         "http://newsapi.org/v2/top-headlines?q=corona&sortBy=publishedAt&apiKey=9f7ce4ec55184b8c82493084022d1284&language=en&catergory=health&qInTitle=corona"
       )
       .then((response) => {
-        console.log(response.data.articles);
+        // console.log(response.data.articles);
         setNews(response.data.articles);
       });
   }, []);
@@ -135,16 +199,16 @@ export default function Survilance() {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         return axios.get("api...");
       })
       .then((response) => {
-        console.log("Hurray");
+        // console.log("Hurray");
         setMedia(null);
         setShowModal(false);
       })
       .catch((error) => {
-        console.log("error occured");
+        // console.log("error occured");
       });
   };
 
@@ -168,6 +232,7 @@ export default function Survilance() {
               textDecoration: "none",
               color: "grey",
               borderLeft: "3px solid #007bff",
+              paddingLeft: ".5rem"
             }}
             to="/survilliance/live"
           >
@@ -182,6 +247,7 @@ export default function Survilance() {
               textDecoration: "none",
               color: "grey",
               borderLeft: "3px solid #007bff",
+              paddingLeft: ".5rem"
             }}
             onClick={handleShowModal}
           >
@@ -190,16 +256,24 @@ export default function Survilance() {
         </Grid>
 
         <Grid item>
-          <Card style={{marginTop: "2em"}}>    
+          <Card className={classes.card} style={{marginTop: "2em"}}>    
             <Typography align="center" gutterBottom variant="h4">Today's Headlines </Typography>
             {newss.length !== 0 &&
               newss.slice(0, 5).map((x) => {
                 return (
-                  <Row className="mb-2" style={{lineHeight: "1.5rem",marginTop: "2rem"}}>
-                    <Col style={{}} className="text-left">
-                      <Typography variant="h6" align="center">
+                  <Row className="mb-2 border-bottom" style={{lineHeight: "1.5rem",marginTop: "2rem"}}>
+                    <Col style={{}} className="text-left px-4">
+                      <a
+                        style={{fontFamily: "Comic Neue, cursive", fontWeight: 400, fontStyle: "italic",
+                        textDecoration: "none", marginLeft: ".4em", marginRight: ".4em", fontSize: "1.3rem",
+                        color: "#000"
+                        }} 
+                        component="a" 
+                        target="_blank" href={`${x.url}`} 
+                      >
+                        {console.log(x.title)}
                         {x.title}
-                      </Typography>
+                      </a>
                     </Col>
                   </Row>
                 );
@@ -223,9 +297,9 @@ export default function Survilance() {
 
   return (
     <React.Fragment>
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal style={{marginTop: "35vh"}} show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Upload Section</Modal.Title>
+          <Modal.Title>Upload Video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Upload MPEG4 Video for analysis</h4>
@@ -238,7 +312,6 @@ export default function Survilance() {
                 borderRadius: "3px",
                 margin: "auto",
                 cursor: "pointer"
-
               }}
             >
               Video Upload!
@@ -294,8 +367,14 @@ export default function Survilance() {
           <Grid item>
             <div className={classes.streamer}>
               {/* <Blink color='white' text='No Source detected' fontSize='6rem'/> */}
-              <img url="http://localhost:8000/video_feed" alt="feed" />
+              <img className={classes.video} src="http://localhost:8000/video_feed" alt="feed" />
             </div>
+          </Grid>
+
+          <Grid item container justify="center">
+            <BtnCustom color="#FF1493">
+              STOP
+            </BtnCustom>
           </Grid>
         </Grid>
 
@@ -307,7 +386,7 @@ export default function Survilance() {
           style={{ marginLeft: "25px", marginTop: "25px", height: "70%" }}
         >
           <Grid item>
-            <Card>
+            <Card className={classes.card}>
               <Typography variant="h4" align="center" gutterBottom>GENRAL GUIDELINES</Typography>
               <ul>
                 <li>
@@ -353,53 +432,60 @@ export default function Survilance() {
             </Card>
           </Grid>
           <hr className="mb-1"></hr>
-          <Card style={{marginTop: "1rem"}}>
+          <Card className={classes.card} style={{marginTop: "1rem"}}>
             <Typography variant="h4" align="center" gutterBottom>Summary </Typography>
             <BContainer fluid>
               {Object.keys(summary).length !== 0 && (
                 <>
-                  <Row className="mb-1">
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Total Cases</Col>
                     <Col style={{}} className="text-right">
                       {summary.total_cases}
                     </Col>
                   </Row>
-                  <Row className="mb-1">
+
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Active Cases</Col>
                     <Col style={{}} className="text-right">
                       {summary.active_cases}
                     </Col>
                   </Row>{" "}
-                  <Row className="mb-1">
+
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Deaths</Col>
                     <Col style={{}} className="text-right">
                       {summary.deaths}
                     </Col>
                   </Row>{" "}
-                  <Row className="mb-1">
+                  
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Recovered</Col>
                     <Col style={{}} className="text-right">
                       {summary.recovered}
                     </Col>
                   </Row>{" "}
-                  <Row className="mb-1">
+
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Critical</Col>
                     <Col style={{}} className="text-right">
                       {summary.critical}
                     </Col>
                   </Row>
-                  <Row className="mb-1">
+
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Tested</Col>
                     <Col style={{}} className="text-right">
                       {summary.tested}
                     </Col>
                   </Row>
-                  <Row className="mb-1">
+
+                  <Row className="mb-2 border-bottom">
                     <Col style={{ fontWeight: 600 }}>Recovered Ratio</Col>
                     <Col style={{}} className="text-right">
                       {summary.recovery_ratio}
                     </Col>
                   </Row>
+
                   <Row className="mb-1">
                     <Col style={{ fontWeight: 600 }}>Deaths Ratio</Col>
                     <Col style={{}} className="text-right">

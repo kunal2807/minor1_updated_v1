@@ -21,6 +21,12 @@ export default createMuiTheme({
   },
 
   typography: {
+
+    h4: {
+      fontFamily: "Comic Neue, cursive",
+      fontWeight: 700
+    },
+
     h5: {
       backgroundImage: "linear-gradient(to right, #ffefba, #ffffff)",
       WebkitBackgroundClip: "text",
@@ -34,14 +40,23 @@ export default createMuiTheme({
     },
 
     h6: {
-      fontFamily: "Roboto, sans-serif",
-      fontWeight: 500
+      fontFamily: "Comic Neue, cursive",
+      fontWeight: 400
     },
 
     body1: {
-      fontFamily: "Roboto, sans-serif",
-      fontWeight: 400
+      fontFamily: "Comic Neue, cursive",
+      fontWeight: 400,
+      fontStyle: "italic"
       // fontWeight: "700"
+    },
+
+    body2: {
+      fontFamily: "Comic Neue, cursive",
+      fontWeight: 400,
+      fontSize: "2rem",
+      lineHeight: 0,
+      fontStyle: "italic"
     },
 
     button: {
