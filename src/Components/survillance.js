@@ -8,14 +8,10 @@ import {
   Typography,
   Card,
 } from "@material-ui/core";
-// import Webcam from "react-webcam";
-// import Blink from 'blink'
 import styled from "styled-components";
-import { NavLink} from "react-router-dom";
-// import Live from "./live";
-// import Record from "./record";
-// import videoFeed from '../axios'
+import { NavLink, Link} from "react-router-dom";
 import axios from "axios";
+
 import {
   Container as BContainer,
   Row,
@@ -156,12 +152,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Survilance() {
+
   const classes = useStyles();
-  // const [feed, setFeed] = useState("");
+  const [feed, setFeed] = useState("http://localhost:8000/video_feed?source=0");
   const [summary, setSummary] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [media, setMedia] = useState(null);
   const [newss, setNews] = useState([]);
+  const [image, setImage] = useState(null)
 
   const handleShowModal = () => setShowModal(true);
 
@@ -189,27 +187,36 @@ export default function Survilance() {
     setMedia(e.target.files[0]);
   };
 
+  const handleStop = () =>{
+    axios.get("http://localhost:8000/feed_stop").then(response=>setImage(null))
+  }
+
   const handleCloseModalUpload = () => {
     let formData = new FormData();
     formData.append("video", media);
+    console.log("###data: ", formData)
     axios
-      .post("api...", formData, {
+      .post(`http://localhost:8000/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
         // console.log(response.data);
-        return axios.get("api...");
-      })
-      .then((response) => {
-        // console.log("Hurray");
-        setMedia(null);
-        setShowModal(false);
+        // if (response.status==200)
+        console.log("response of upload ", response)
+        setShowModal(false)
+        setImage((<img className={classes.video} src="http://localhost:8000/video_feed?source=./input.mp4" alt="feed" />))
+        setFeed("http://localhost:8000/video_feed?source=./input.mp4")
       })
       .catch((error) => {
         // console.log("error occured");
+        console.log("LINE 213: ", error)
       });
+    // fetch(`http://localhost:8000/upload`, {
+    //   method: "POST",
+    //   body: formData,
+    // }).then((response) => console.log(response));
   };
 
   const handleCloseModal = () => {
@@ -221,6 +228,8 @@ export default function Survilance() {
   //   setFeed(response.data);
   //   console.log(response.data);
   // });
+
+  // conosole.log(image)
 
   const tabsComponent = (
     <React.Fragment>
@@ -234,6 +243,7 @@ export default function Survilance() {
               borderLeft: "3px solid #007bff",
               paddingLeft: ".5rem"
             }}
+            onClick = {()=>setImage((<img className={classes.video} src={feed} alt="feed" />))}
             to="/survilliance/live"
           >
             Use Webcam
@@ -261,7 +271,7 @@ export default function Survilance() {
             {newss.length !== 0 &&
               newss.slice(0, 5).map((x) => {
                 return (
-                  <Row className="mb-2 border-bottom" style={{lineHeight: "1.5rem",marginTop: "2rem"}}>
+                  <Row key={x.url} className="mb-2 border-bottom" style={{lineHeight: "1.5rem",marginTop: "2rem"}}>
                     <Col style={{}} className="text-left px-4">
                       <a
                         style={{fontFamily: "Comic Neue, cursive", fontWeight: 400, fontStyle: "italic",
@@ -269,9 +279,9 @@ export default function Survilance() {
                         color: "#000"
                         }} 
                         component="a" 
-                        target="_blank" href={`${x.url}`} 
+                        target="_blank" rel="noreferrer" href={`${x.url}`} 
+                        
                       >
-                        {console.log(x.title)}
                         {x.title}
                       </a>
                     </Col>
@@ -293,7 +303,7 @@ export default function Survilance() {
     <span className="mx-2">Uplaod New Video </span>
   );
 
-
+    // console.log("###FILE: ", fileInfo)
 
   return (
     <React.Fragment>
@@ -340,6 +350,8 @@ export default function Survilance() {
           </BButton>
         </Modal.Footer>
       </Modal>
+      
+      
       <AppBar
         style={{
           background:
@@ -367,14 +379,17 @@ export default function Survilance() {
           <Grid item>
             <div className={classes.streamer}>
               {/* <Blink color='white' text='No Source detected' fontSize='6rem'/> */}
-              <img className={classes.video} src="http://localhost:8000/video_feed" alt="feed" />
+              {/* <img className={classes.video} src={feed} alt="feed" /> */}
+              {image}
             </div>
           </Grid>
 
           <Grid item container justify="center">
-            <BtnCustom color="#FF1493">
-              STOP
-            </BtnCustom>
+            <Link to="/" onClick={handleStop}>
+              <BtnCustom color="#1565c0">
+                STOP
+              </BtnCustom>
+            </Link>
           </Grid>
         </Grid>
 

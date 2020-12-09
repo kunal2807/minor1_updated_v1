@@ -6,12 +6,14 @@ import Typed from "typed.js";
 import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Heading = styled.h1`
   // margin-top: 20rem;
   // margin-bottom: 8rem;
-  font-family: Cursive;
-  font-size: 4rem;
+  font-family: Comic Neue, cursive;
+  font-weight: 800;
+  font-size: 6rem;
   color: white;
   text-align: center;
 `;
@@ -63,7 +65,7 @@ export default class Main extends React.Component {
     // Hero typed
     var myStrings = [
       "COVID-19 survilance system",
-      "For Live , Autonomous Detection and Scanning",
+      "For Live, Autonomous Detection",
       "Smart and Efficient",
     ];
     this.typed = new Typed(".typed-heading", {
@@ -78,6 +80,10 @@ export default class Main extends React.Component {
   }
   componentWillUnmount() {
     this.typed.destroy();
+  }
+
+  handleStart = () => {
+    axios.get("http://localhost:8000/video_feed")
   }
 
   render() {
